@@ -119,11 +119,58 @@
                   font-size: 18px;
               }
 
-              .top-nav a:hover {
-                  /*color: #ff6347;*/
-                  animation: tocol 0.5s;
-                  color: #ff6347;
-              }
+                .top-nav a:hover {
+                    /*color: #ff6347;*/
+                    animation: tocol 0.5s;
+                    color: #0000007f;
+                }
+
+
+            .info {
+                display: flex;
+                justify-content: center;
+                background-color: #333;
+                padding: 10px 0;
+                border-radius: 10px 10px 10px 10px;
+                /* For glass transparency: */
+                background: rgba(255, 255, 255, 0.400);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.153);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.03);
+                bottom: 16px;
+                right: 16px;
+            }
+
+                .info ul {
+                    list-style: none;
+                    display: flex;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .info li {
+                    margin: 0 15px;
+                }
+
+                .info a {
+                    color: rgb(0, 0, 0);
+                    text-decoration: none;
+                    font-size: 18px;
+                }
+
+                    .info a:hover {
+                        /*color: #ff6347;*/
+                        animation: tocol 0.5s;
+                        color: #0000007f;
+                    }
+
+
+
+            a {
+                cursor: url("./Assets/cursor.png"), none;
+            }
 
               /* The snackbar - position it at the bottom and in the middle of the screen */
               #snackbar {
@@ -220,7 +267,7 @@
                   }
 
                   to {
-                      color: #ff6347
+                      color: #0000007f
                   }
               }
 
@@ -238,17 +285,25 @@
               #cutting-edge {
                   font-size: 58px;
               }
+
+            #infob {
+                display: flex;
+                margin:200px 200px 200px 200px;
+            }
         </style>
     </head>
 <body>
     <!-- The actual snackbar -->
-    <div id="snackbar" style='font-family: "Sega"'>Подпишись на YouTube канал!<button onclick="HideMessage()">⨯</button></div>
-    <header>
-        <nav class="top-nav">
-            
-        </nav>
-    </header>
-
+    <div id="snackbar">
+        <p>Этот веб-сайт создан лично мной, и использует компоненты, разработанные другими авторами. Но основа моя :)</p>
+        <p>Использовано:</p>
+        <a href="https://www.flaticon.com/free-icons/pointer" title="Курсор">Pointer icons created by SeyfDesigner - Flaticon</a>
+        <br>
+        <a href="https://github.com/tholman/cursor-effects/tree/master" title="След курсора как типа прожектор или что-то в этом роде">След курсора как типа прожектор или что-то в этом роде от Tholman. Лицензия: MIT</a>
+        <br />
+        <a href="https://www.gsap.com">GSAP</a>
+        <button onclick="HideMessage()">⨯</button>
+    </div>
     <header>
         <nav class="top-nav">
             <ul>
@@ -256,6 +311,7 @@
                 <li><a href="https://www.youtube.com/@proxysonic" target="_blank">YouTube</a></li>
                 <li><a href="https://discord.com/invite/DDreaqU8xW" target="_blank">Discord</a></li>
                 <li><a href="mailto:proxysonicreal@outlook.com">Э-почта</a></li>
+                <li><a onclick="displayMessage()">Инфо</a></li>
             </ul>
         </nav>
     </header>
@@ -271,14 +327,14 @@
                 <li><h6 title="Я не считаю, что у меня очень уж идеальные видео с превосходным монтажем и так далее">Самый худший соникотубер на свете</h6></li>
                 <li><h6>Самый ленивый человек из существующих (и не очень)</h6></li>
             </ul>
-            <a href="https://www.flaticon.com/free-icons/pointer" title="pointer icons">Pointer icons created by SeyfDesigner - Flaticon</a>
             <!-- GSAP CDN -->
             <script src="./gsap-public/minified/gsap.min.js"></script>
             <script src="./gsap-public/minified/ScrollTrigger.min.js"></script>
             <script src="./gsap-public/minified/ScrollSmoother.min.js"></script>
-
+            <script src="./Assets/followingDotCursor.js"></script>
             <script>
                 //displayMessage();
+                followingDotCursor();
 
                 function displayMessage() {
                     // Get the snackbar DIV
