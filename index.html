@@ -1,0 +1,372 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="/favicon.ico" />
+    <meta charset="UTF-8">
+    <title>ProxySonic</title>
+        <style>
+              @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+              
+              @font-face {
+                  font-family: 'Sonic';
+                  src: url("./Assets/NiseSegaSonic.TTF") format('truetype');
+              }
+
+            @font-face {
+                font-family: 'Sega';
+                src: url("./Assets/NiseSegaCyrillic.ttf") format('truetype');
+            }
+
+            html {
+                cursor: url("./Assets/cursor.png"), none;
+            }
+
+            body {
+                margin: 0;
+                font-family: "Roboto";
+                background: #00aaff;
+                background: linear-gradient(320deg, rgba(0, 170, 255, 1) 0%, rgba(113, 240, 113, 1) 50%, rgba(222, 222, 7, 1) 100%);
+                height: 3000px; /* allows scrolling */
+                overflow-y: scroll; /* Add the ability to scroll */
+            }
+
+            p, a {
+                font-family: "Roboto";
+                color: rgba(0, 0, 0, 0.754);
+            }
+
+            h1 {
+                font-family: "Roboto";
+                color: #000000;
+            }
+            h6 {
+                font-family: "Roboto";
+                color: #000000;
+            }
+
+              .hero {
+                  height: 100vh;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+              }
+
+              h1 {
+                  font-size: 10rem;
+                  margin: 0;
+              }
+
+              h6 {
+                  font-size: 2rem;
+                  margin: 0;
+              }
+
+              .horizontal-section {
+                  margin-top: 200px; /* Adjust this to account for navbar height */
+                  height: 100vh;
+                  overflow: hidden;
+                  position: relative;
+              }
+
+              .horizontal-wrapper {
+                  display: flex;
+                  width: max-content; /* So all panels are in a row */
+              }
+
+              .panel {
+                  flex: 0 0 100vw; /* Each panel is full screen width */
+                  height: 100vh;
+              }
+
+              header {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  z-index: 100;
+              }
+
+              .top-nav {
+                  display: flex;
+                  justify-content: center;
+                  background-color: #333;
+                  padding: 10px 0;
+                  border-radius: 10px 10px 10px 10px;
+                  /* For glass transparency: */
+                  background: rgba(255, 255, 255, 0.400);
+                  border-radius: 16px;
+                  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.153);
+                  backdrop-filter: blur(4px);
+                  -webkit-backdrop-filter: blur(15px);
+                  border: 1px solid rgba(255, 255, 255, 0.03);
+              }
+
+              .top-nav ul {
+                  list-style: none;
+                  display: flex;
+                  margin: 0;
+                  padding: 0;
+              }
+
+              .top-nav li {
+                  margin: 0 15px;
+              }
+
+              .top-nav a {
+                  color: rgb(0, 0, 0);
+                  text-decoration: none;
+                  font-size: 18px;
+              }
+
+              .top-nav a:hover {
+                  /*color: #ff6347;*/
+                  animation: tocol 0.5s;
+                  color: #ff6347;
+              }
+
+              /* The snackbar - position it at the bottom and in the middle of the screen */
+              #snackbar {
+                  visibility: hidden; /* Hidden by default. Visible on click */
+                  min-width: 250px; /* Set a default minimum width */
+                  margin-left: -125px; /* Divide value of min-width by 2 */
+                  background-color: #333; /* Black background color */
+                  color: #000000; /* White text color */
+                  text-align: center; /* Centered text */
+                  border-radius: 2px; /* Rounded borders */
+                  padding: 16px; /* Padding */
+                  position: fixed; /* Sit on top of the screen */
+                  z-index: 1; /* Add a z-index if needed */
+                  left: 35vw;
+                  bottom: 30px; /* 30px from the bottom */
+                  margin: auto;
+                  /* For glass transparency: */
+                  background: rgba(255, 255, 255, 0.400);
+                  border-radius: 16px;
+                  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.153);
+                  backdrop-filter: blur(15px);
+                  -webkit-backdrop-filter: blur(15px);
+                  border: 1px solid rgba(255, 255, 255, 0.03);
+              }
+
+              /* Show the snackbar when clicking on a button (class added with JavaScript) */
+              #snackbar.show {
+                  visibility: visible; /* Show the snackbar */
+                  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+        However, delay the fade out process for 2.5 seconds */
+                  -webkit-animation: fadein 0.5s;
+                  animation: fadein 0.5s,;
+              }
+              /* Show the snackbar when clicking on a button (class added with JavaScript) */
+              #snackbar.hide {
+                  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+        However, delay the fade out process for 2.5 seconds */
+                  -webkit-animation: fadeout 0.5s;
+                  animation: fadeout 0.5s,;
+              }
+
+              /* Animations to fade the snackbar in and out */
+              @-webkit-keyframes fadein {
+                  from {
+                      bottom: 0;
+                      opacity: 0;
+                  }
+
+                  to {
+                      bottom: 30px;
+                      opacity: 1;
+                  }
+              }
+
+              @keyframes fadein {
+                  from {
+                      bottom: 0;
+                      opacity: 0;
+                  }
+
+                  to {
+                      bottom: 30px;
+                      opacity: 1;
+                  }
+              }
+
+              @-webkit-keyframes fadeout {
+                  from {
+                      bottom: 30px;
+                      opacity: 1;
+                  }
+
+                  to {
+                      bottom: 0;
+                      opacity: 0;
+                  }
+              }
+
+              @keyframes fadeout {
+                  from {
+                      bottom: 30px;
+                      opacity: 1;
+                  }
+
+                  to {
+                      bottom: 0;
+                      opacity: 0;
+                  }
+              }
+
+              @keyframes tocol {
+                  from {
+                      color: #000;
+                  }
+
+                  to {
+                      color: #ff6347
+                  }
+              }
+
+              button {
+                  /* For glass transparency */
+                  background: rgba(255, 255, 255, 0);
+                  border-radius: 16px 16px 16px 16px;
+                  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                  backdrop-filter: blur(15px);
+                  -webkit-backdrop-filter: blur(15px);
+                  border: 1px solid rgba(255, 255, 255, 0.03);
+                  width: 24px;
+              }
+
+              #cutting-edge {
+                  font-size: 58px;
+              }
+        </style>
+    </head>
+<body>
+    <!-- The actual snackbar -->
+    <div id="snackbar" style='font-family: "Sega"'>Подпишись на YouTube канал!<button onclick="HideMessage()">⨯</button></div>
+    <header>
+        <nav class="top-nav">
+            
+        </nav>
+    </header>
+
+    <header>
+        <nav class="top-nav">
+            <ul>
+                <li><a href="./index.html">Домой</a></li>
+                <li><a href="https://www.youtube.com/@proxysonic" target="_blank">YouTube</a></li>
+                <li><a href="https://discord.com/invite/DDreaqU8xW" target="_blank">Discord</a></li>
+                <li><a href="mailto:proxysonicreal@outlook.com">Э-почта</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <section class="hero">
+                <h1 id="title">ProxySonic</h1>
+            </section>
+            <ul>
+                <li><h6 title="Я не считаю, что у меня очень уж идеальные видео с превосходным монтажем и так далее">Самый худший соникотубер на свете</h6></li>
+                <li><h6>Самый ленивый человек из существующих (и не очень)</h6></li>
+            </ul>
+            <a href="https://www.flaticon.com/free-icons/pointer" title="pointer icons">Pointer icons created by SeyfDesigner - Flaticon</a>
+            <!-- GSAP CDN -->
+            <script src="./gsap-public/minified/gsap.min.js"></script>
+            <script src="./gsap-public/minified/ScrollTrigger.min.js"></script>
+            <script src="./gsap-public/minified/ScrollSmoother.min.js"></script>
+
+            <script>
+                //displayMessage();
+
+                function displayMessage() {
+                    // Get the snackbar DIV
+                    var x = document.getElementById("snackbar");
+
+                    // Add the "show" class to DIV
+                    x.className = "show";
+                }
+                function HideMessage() {
+                    // Get the snackbar DIV
+                    var x = document.getElementById("snackbar");
+
+                    // Add the "show" class to DIV
+                    x.className = "hide";
+                }
+
+                // Ensure the navigation bar stays visible on load
+                gsap.from(".top-nav", {
+                    opacity: 0,
+                    y: -50,
+                    duration: 1,
+                    ease: "power2.out",
+                });
+
+                let vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+                // create the scrollSmoother before your scrollTriggers
+                let smoother = ScrollSmoother.create({
+                    wrapper: '#smooth-wrapper',
+                    content: '#smooth-content',
+                    smooth: 2,
+                    smoothTouch: 2
+                });
+                gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+                gsap.registerPlugin(ScrollTrigger);
+
+                gsap.to("#title", {
+                    scale: 0.5,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".hero",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true,
+                        pin: true
+                    }
+                });
+                // Horizontal scroll animation
+                let totalPanels = document.querySelectorAll(".panel").length;
+                let wrapper = document.querySelector(".horizontal-wrapper");
+                let wrapperWidth = wrapper.offsetWidth; // Get the actual width of the wrapper
+
+
+                gsap.to(".horizontal-wrapper", {
+                    xPercent: -100 * (totalPanels),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".horizontal-section",
+                        pin: true,
+                        scrub: true,
+                        end: () => "+=" + wrapperWidth,
+                    }
+                });
+                let dlkwbtotalPanels = document.querySelectorAll(".wfpanel").length;
+                let dlkwbwrapper = document.querySelector(".workfaster-horizontal-wrapper");
+                let fdsfvsfwrapperWidth = dlkwbwrapper.offsetWidth; // Get the actual width of the wrapper
+                gsap.to(".workfaster-horizontal-wrapper", {
+                    xPercent: -100 * (dlkwbtotalPanels - 1),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".wf-section",
+                        pin: true,
+                        scrub: true,
+                        end: () => "+=" + vw,
+                    }
+                });
+                gsap.registerPlugin(ScrollTrigger);
+
+                /* Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon */
+                function iconpress() {
+                    var x = document.getElementById("myTopnav");
+                    if (x.className === "topnav") {
+                        x.className += " responsive";
+                    } else {
+                        x.className = "topnav";
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
