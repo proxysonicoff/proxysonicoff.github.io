@@ -23,12 +23,17 @@
             }
 
             body {
-                margin: 0;
+                margin: 8px;
                 font-family: "Roboto";
                 background: #00aaff;
                 background: linear-gradient(320deg, rgba(0, 170, 255, 1) 0%, rgba(113, 240, 113, 1) 50%, rgba(222, 222, 7, 1) 100%);
                 height: 3000px; /* allows scrolling */
                 overflow-y: scroll; /* Add the ability to scroll */
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                position:relative;
+                left: 8px;
             }
 
             p, a {
@@ -125,6 +130,25 @@
                     color: #0000007f;
                 }
 
+            #footer {
+                display: flex;
+                justify-content: center;
+                background-color: #333;
+                padding: 10px 0;
+                border-radius: 10px 10px 10px 10px;
+                /* For glass transparency: */
+                background: rgba(255, 255, 255, 0.400);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.153);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.03);
+                translate: none;
+                rotate: none;
+                scale: none;
+                transform: translate(0px);
+                opacity: 1;
+            }
 
             .info {
                 display: flex;
@@ -290,6 +314,27 @@
                 display: flex;
                 margin:200px 200px 200px 200px;
             }
+
+            /* YouTube iframes */
+            .youtube-wrapper {
+                /* For glass transparency */
+                background: rgba(255, 255, 255, 0);
+                border-radius: 16px 16px 16px 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(15px);
+                -webkit-backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.03);
+                width:576px;
+                margin:8px;
+                height:331px;
+            }
+                .youtube-wrapper iframe {
+                    border-radius: 16px 16px 16px 16px;
+                    border: 1px solid rgba(255, 255, 255, 0.03);
+                    left: 8px;
+                    position: relative;
+                    top: 8px;
+                }
         </style>
     </head>
 <body>
@@ -327,7 +372,10 @@
                 <li><h6 title="Я не считаю, что у меня очень уж идеальные видео с превосходным монтажем и так далее">Самый худший соникотубер на свете</h6></li>
                 <li><h6>Самый ленивый человек из существующих (и не очень)</h6></li>
             </ul>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/uMLbZUsPTsQ?si=PhDgv-CZkV393utC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h2 id="sect" title="Показываются только 5 последних видео. МОГУТ НЕ ОТРАЖАТЬ ТЕКУЩУЮ СИТУАЦИЮ!">Видео на YouTube</h2>
+            <div class='youtube-wrapper'>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/uMLbZUsPTsQ?si=PhDgv-CZkV393utC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
             <!-- GSAP CDN -->
             <script src="./gsap-public/minified/gsap.min.js"></script>
             <script src="./gsap-public/minified/ScrollTrigger.min.js"></script>
@@ -423,7 +471,12 @@
                     }
                 }
             </script>
+            <div id="footer">
+                <p>(C) PROXYSONIC, 2026. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</p>
+            </div>
         </div>
+
+
     </div>
 </body>
 </html>
